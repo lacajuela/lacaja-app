@@ -1,0 +1,9 @@
+.expo
+node_modules
+out
+.idea
+*.iml
+*.ipr
+*.iws
+*.class
+*.war
