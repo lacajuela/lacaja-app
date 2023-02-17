@@ -2,233 +2,89 @@ import React from 'react';
 import {
   Box,
   VStack,
-  ScrollView,
-  HStack,
-  Icon,
+  Pressable,
   Text,
   Divider,
-  Button,
-  IconButton,
-  Image,
+  HStack,
+  Avatar,
+  ChevronRightIcon,
 } from 'native-base';
-import { MaterialIcons } from '@expo/vector-icons';
-type Icon = {
-  iconName: string;
-  iconText: string;
-};
-const list: Icon[] = [
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+const options = [
   {
-    iconName: 'person',
-    iconText: 'Contacts',
+    label: 'Your Trips',
   },
   {
-    iconName: 'groups',
-    iconText: 'Groups',
+    label: 'Help',
   },
   {
-    iconName: 'notifications',
-    iconText: 'Notification',
+    label: 'Wallet',
   },
   {
-    iconName: 'shopping-bag',
-    iconText: 'Order',
+    label: 'Send a Gift',
   },
   {
-    iconName: 'settings',
-    iconText: 'Settings',
-  },
-  {
-    iconName: 'policy',
-    iconText: 'Privacy Policies',
-  },
-  {
-    iconName: 'support-agent',
-    iconText: 'Help & Support',
-  },
-  {
-    iconName: 'share',
-    iconText: 'Refer & Earn',
+    label: 'Settings',
   },
 ];
 
-export default function Sidebar() {
+const Drawer = createDrawerNavigator();
+function Sidebar({ navigation }: { navigation: NativeStackNavigationProp<any> }) {
   return (
-    <Box
-      w="80"
-      borderRightWidth="1"
-      _light={{ bg: 'white', borderRightColor: 'coolGray.200' }}
-      _dark={{ bg: 'coolGray.900', borderRightColor: 'coolGray.800' }}
-    >
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-      >
-        <VStack
-          pb="4"
-          mt="10"
-          alignItems="center"
-          borderBottomWidth="1"
-          _light={{
-            borderBottomColor: 'coolGray.200',
-          }}
-          _dark={{
-            borderBottomColor: 'coolGray.800',
-          }}
-        >
-          <Image
-            width={{ base: 20, md: 140 }}
-            height={{ base: 20, md: 140 }}
-            source={require('../assets/pannel.png')}
-            alt="Alternate Text"
-            size="xs"
-          />
-
-          <HStack alignItems="center" justifyContent="center" space="2" pt={3}>
-            <Text
-              fontSize="xl"
-              fontWeight="bold"
-              _light={{ color: 'coolGray.800' }}
-            >
-              Jane Doe
+    <Box flex="1" bg="white">
+      <VStack bg="black" space="4" pt="16" divider={<Divider thickness="0.2" />}>
+        <HStack alignItems="center" space="3" px="4">
+          <Avatar bg="gray.300">GG</Avatar>
+          <VStack>
+            <Text fontSize="md" fontWeight="bold" color="white">
+              Gaurav Guha
             </Text>
-            <IconButton
-              p={0}
-              icon={
-                <Icon
-                  as={MaterialIcons}
-                  name="mode-edit"
-                  size={4}
-                  _light={{ color: 'coolGray.800' }}
-                  _dark={{ color: 'white' }}
-                />
-              }
-              onPress={() => {
-                console.log('hello');
-              }}
-            />
-          </HStack>
-          <Text
-            fontSize="sm"
-            fontWeight="medium"
-            textAlign="center"
-            pt={1}
-            _light={{ color: 'coolGray.500' }}
-            _dark={{ color: 'coolGray.400' }}
-          >
-            janedoe2@mydomain.com
+            <Text fontSize="xs" color="trueGray.400">
+              5.00
+            </Text>
+          </VStack>
+        </HStack>
+        <Pressable px="4" pb="5" pt="1" flexDir="row" justifyContent="space-between">
+          <Text color="warmGray.100" fontSize="md">
+            Messages
           </Text>
-        </VStack>
-        <VStack px="4" py="4">
-          {list.map((item, idx) => {
-            return (
-              <Button
-                key={idx}
-                variant="ghost"
-                justifyContent="flex-start"
-                py="3"
-                px="5"
-                _light={{
-                  _text: { color: 'coolGray.800' },
-                  _icon: { color: 'coolGray.800' },
-                }}
-                _dark={{
-                  _text: { color: 'coolGray.50' },
-                  _icon: { color: 'coolGray.50' },
-                }}
-                _text={{
-                  fontSize: 'md',
-                  fontWeight: 'medium',
-                }}
-                _hover={{
-                  _text: {
-                    _light: {
-                      color: 'primary.900',
-                    },
-                    _dark: {
-                      color: 'primary.500',
-                    },
-                  },
-
-                  _icon: {
-                    _light: {
-                      color: 'primary.900',
-                    },
-                    _dark: {
-                      color: 'primary.500',
-                    },
-                  },
-                  _light: {
-                    bg: 'primary.100',
-                  },
-                  _dark: {
-                    bg: 'coolGray.800',
-                  },
-                }}
-                leftIcon={
-                  <Icon
-                    size="5"
-                    mr="2"
-                    as={MaterialIcons}
-                    name={item.iconName}
-                  />
-                }
-              >
-                {item.iconText}
-              </Button>
-            );
-          })}
-        </VStack>
-      </ScrollView>
-      <Divider _dark={{ bgColor: 'coolGray.800' }} />
-      <Box px="6" py="4">
-        <Button
-          variant="ghost"
-          justifyContent="flex-start"
-          p="3"
-          leftIcon={
-            <Icon size="5" mr="2" as={MaterialIcons} name="exit-to-app" />
-          }
-          _light={{
-            _text: { color: 'coolGray.800' },
-            _icon: { color: 'coolGray.800' },
-          }}
-          _dark={{
-            _text: { color: 'coolGray.50' },
-            _icon: { color: 'coolGray.50' },
-          }}
-          _text={{
-            fontSize: 'md',
-            fontWeight: 'medium',
+          <ChevronRightIcon size="sm" color="white" />
+        </Pressable>
+      </VStack>
+      <VStack space="2" w="100%">
+        {options.map((option, idx) => {
+          return (
+            <Pressable
+              key={idx}
+              p="4"
+              _pressed={{
+                bg: 'coolGray.300',
+              }}
+              _hover={{
+                bg: 'coolGray.200',
+              }}
+            >
+              <Text fontSize="md">{option.label}</Text>
+            </Pressable>
+          );
+        })}
+        <Pressable
+          p="4"
+          _pressed={{
+            bg: 'coolGray.300',
           }}
           _hover={{
-            _text: {
-              _light: {
-                color: 'primary.900',
-              },
-              _dark: {
-                color: 'primary.500',
-              },
-            },
-
-            _icon: {
-              _light: {
-                color: 'primary.900',
-              },
-              _dark: {
-                color: 'primary.500',
-              },
-            },
-            _light: {
-              bg: 'primary.100',
-            },
-            _dark: {
-              bg: 'coolGray.800',
-            },
+            bg: 'coolGray.200',
           }}
+          onPress={() => navigation.navigate('Login')}
         >
-          Logout
-        </Button>
-      </Box>
+          <Text fontSize="md">Logout</Text>
+        </Pressable>
+      </VStack>
     </Box>
   );
 }
+
+export default Sidebar;

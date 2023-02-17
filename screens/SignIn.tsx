@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
 import {
-  Button,
-  HStack,
-  VStack,
-  Text,
-  Link,
-  Checkbox,
-  Divider,
-  Image,
-  useColorModeValue,
-  IconButton,
-  Icon,
-  Center,
-  Hidden,
   Box,
+  Button,
+  Center,
   FormControl,
+  Hidden,
+  HStack,
+  Icon,
+  IconButton,
   IInputProps,
+  Image,
+  Link,
+  Text,
+  useColorModeValue,
+  VStack,
 } from 'native-base';
 import { MaterialIcons } from '@expo/vector-icons';
 import FloatingLabelInput from '../components/FloatingLabelInput';
@@ -38,13 +36,16 @@ const FormInput = ({
   </VStack>
 );
 
-const SignInForm = () => {
+type SignInFormProps = {
+  authenticateAction: (username: string, password: string) => void;
+};
+const SignInForm = ({ authenticateAction }: SignInFormProps) => {
   type FormData = {
-    email: string;
+    documento: string;
     password: string;
   };
   const [formData, setFormData] = useState<FormData>({
-    email: '',
+    documento: '',
     password: '',
   });
   const [showPass, setShowPass] = React.useState(false);
@@ -53,17 +54,15 @@ const SignInForm = () => {
     <FormControl>
       <FormInput
         isRequired
-        label="Email"
+        label="Nro de documento"
         labelColor="#9CA3AF"
         labelBGColor={useColorModeValue('#fff', '#1F2937')}
-        defaultValue={formData.email}
-        onChangeText={(email: string) =>
-          setFormData((prev) => ({ ...prev, email: email }))
+        defaultValue={formData.documento}
+        onChangeText={(documento: string) =>
+          setFormData((prev) => ({ ...prev, documento: documento }))
         }
       >
-        <FormControl.ErrorMessage>
-          Please enter a valid email
-        </FormControl.ErrorMessage>
+        <FormControl.ErrorMessage>Por favor, ingresa un documento valido</FormControl.ErrorMessage>
       </FormInput>
       <FormInput
         isRequired
@@ -114,52 +113,25 @@ const SignInForm = () => {
           },
         }}
       >
-        Forgot password?
+        Olvidaste tu contraseña?
       </Link>
-      <Checkbox
-        value="demo"
-        defaultIsChecked
-        accessibilityLabel="Remember me"
-        my="5"
-        _text={{
-          fontSize: 'sm',
-          fontWeight: 'normal',
-          pl: '3',
-        }}
-        _dark={{
-          value: 'checkbox',
-          _checked: {
-            value: 'checkbox',
-            bg: 'primary.700',
-            borderColor: 'primary.700',
-            _icon: { color: 'white' },
-          },
-          _text: {
-            color: 'coolGray.400',
-          },
-        }}
-        _light={{
-          value: 'checkbox',
-          _checked: {
-            value: 'checkbox',
-            bg: 'primary.900',
-            borderColor: 'primary.900',
-          },
-          _text: {
-            color: 'coolGray.800',
-          },
-        }}
+      <Button
+        onPressOut={() => authenticateAction(formData.documento, formData.password)}
+        variant="solid"
+        size="lg"
+        mt={{ base: 5, md: 3 }}
       >
-        Remember me and keep me logged in
-      </Checkbox>
-      <Button variant="solid" size="lg" mt={{ base: 5, md: 3 }}>
-        SIGN IN
+        Inciar sesion
       </Button>
     </FormControl>
   );
 };
 
-const SignInComponent = () => {
+type SignInComponentProps = {
+  moveToSignUpAction: () => void;
+  authenticate: (username: string, password: string) => void;
+};
+const SignInComponent = ({ moveToSignUpAction, authenticate }: SignInComponentProps) => {
   return (
     <KeyboardAwareScrollView
       contentContainerStyle={{
@@ -186,55 +158,9 @@ const SignInComponent = () => {
           _dark={{ color: 'coolGray.50' }}
           mb={8}
         >
-          Sign in to continue
+          Iniciar sesion
         </Text>
-        <SignInForm />
-        <HStack my={4} space="2" alignItems="center" justifyContent="center">
-          <Divider
-            w="30%"
-            _light={{ bg: 'coolGray.200' }}
-            _dark={{ bg: 'coolGray.700' }}
-          />
-          <Text
-            fontWeight="medium"
-            _light={{
-              color: 'coolGray.400',
-            }}
-            _dark={{
-              color: 'coolGray.300',
-            }}
-          >
-            or
-          </Text>
-          <Divider
-            w="30%"
-            _light={{ bg: 'coolGray.200' }}
-            _dark={{ bg: 'coolGray.700' }}
-          />
-        </HStack>
-        <HStack
-          mt={{ base: 6, md: 4 }}
-          justifyContent="center"
-          alignItems={'center'}
-          space="4"
-        >
-          <Link href="https://nativebase.io">
-            <Image
-              width="6"
-              height="6"
-              source={require('../assets/facebook.png')}
-              alt="Alternate Text"
-            />
-          </Link>
-          <Link href="https://nativebase.io">
-            <Image
-              width="6"
-              height="6"
-              source={require('../assets/GoogleLogo.png')}
-              alt="Alternate Text"
-            />
-          </Link>
-        </HStack>
+        <SignInForm authenticateAction={authenticate} />
         <HStack
           space="1"
           safeAreaBottom
@@ -248,10 +174,10 @@ const SignInComponent = () => {
             _light={{ color: 'coolGray.500' }}
             _dark={{ color: 'coolGray.400' }}
           >
-            Don't have an account?
+            Todavia no tienes una cuenta?
           </Text>
           <Link
-            href="https://nativebase.io"
+            onPress={moveToSignUpAction}
             _text={{
               fontSize: { base: 'sm', md: 'xs' },
               fontWeight: 'bold',
@@ -268,7 +194,7 @@ const SignInComponent = () => {
               },
             }}
           >
-            Sign Up
+            Registrate
           </Link>
         </HStack>
       </Box>
@@ -304,21 +230,16 @@ function MobileHeader() {
           <IconButton
             p={0}
             icon={
-              <Icon
-                size="6"
-                as={MaterialIcons}
-                name="keyboard-backspace"
-                color="coolGray.50"
-              />
+              <Icon size="6" as={MaterialIcons} name="keyboard-backspace" color="coolGray.50" />
             }
           />
           <Text color="coolGray.50" fontSize="lg">
-            Sign In
+            Inciar sesion
           </Text>
         </HStack>
         <VStack space={0.5}>
           <Text fontSize="3xl" fontWeight="bold" color="coolGray.50">
-            Welcome back
+            Bienvenido otra vez
           </Text>
           <Text
             fontSize="md"
@@ -330,21 +251,28 @@ function MobileHeader() {
               color: 'primary.300',
             }}
           >
-            Sign in to continue
+            Inicie sesion para continuar
           </Text>
         </VStack>
       </VStack>
     </Hidden>
   );
 }
-export default function SignIn() {
+
+export default function SignIn({ navigation }: any) {
+  const authenticate = (username: string, password: string) => {
+    navigation.navigate('Home');
+  };
+  const moveToSignUpAction = () => {
+    navigation.navigate('SignUp');
+  };
   return (
     <GuestLayout>
       <Hidden till="md">
         <SideContainerWeb />
       </Hidden>
 
-      <SignInComponent />
+      <SignInComponent moveToSignUpAction={moveToSignUpAction} authenticate={authenticate} />
     </GuestLayout>
   );
 }

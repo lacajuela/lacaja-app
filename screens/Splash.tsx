@@ -4,9 +4,10 @@ import GuestLayout from "../layouts/GuestLayout";
 
 type ActionButtonsType = {
     signInAction: () => void;
+    signUpAction: () => void;
 }
 
-function ActionButtons({signInAction}: ActionButtonsType) {
+function ActionButtons({signInAction, signUpAction}: ActionButtonsType) {
   return (
     <VStack space={4} mt={{ base: 10, md: 12 }}>
       <Button variant="subtle" py={4} onPressOut={signInAction}>
@@ -15,6 +16,7 @@ function ActionButtons({signInAction}: ActionButtonsType) {
       <Button
         variant="outline"
         py={4}
+        onPressOut={signUpAction}
         borderColor="secondary.100"
         _text={{
           color: "coolGray.50",
@@ -38,7 +40,7 @@ function HeaderLogo() {
         <Image
           source={require("../assets/cajademedicos_logo.png")}
           height={100}
-            width={270}
+            width={400}
           alt="Logo"
         />
       </Hidden>
@@ -49,6 +51,9 @@ export default function Splash({navigation}:any) {
     const moveToSignIn = () => {
         navigation.navigate('SignIn');
     }
+    const moveToSignUp = () => {
+        navigation.navigate('SignUp');
+    }
   return (
     <GuestLayout>
       <Center w="100%" flex={1}>
@@ -57,11 +62,11 @@ export default function Splash({navigation}:any) {
           w="100%"
           height={{ md: "544" }}
           px={{ base: 4, md: 8 }}
-          bg={{ md: "primary.600" }}
+          bg={{ md: "primary.500" }}
           justifyContent="center"
         >
           <HeaderLogo />
-          <ActionButtons signInAction={moveToSignIn}/>
+          <ActionButtons signInAction={moveToSignIn} signUpAction={moveToSignUp}/>
         </Box>
       </Center>
     </GuestLayout>

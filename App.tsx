@@ -16,9 +16,9 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import SignUp from "./screens/SignUp";
 import SignIn from "./screens/SignIn";
-import OtpVerification from "./screens/OtpVerification";
 import ProductDetails from "./screens/ProductDetails";
 import Splash from "./screens/Splash";
+import Home from "./screens/secured/HomeScreen";
 
 export default ({ children }: { children: React.ReactNode }) => {
   const customTheme = extendTheme({
@@ -26,7 +26,7 @@ export default ({ children }: { children: React.ReactNode }) => {
       initialColorMode: "light",
     },
     colors: {
-      primary: nbTheme.colors.emerald,
+      primary: nbTheme.colors.success,
       customGray: "#2F3948",
       secondary: nbTheme.colors.coolGray,
     },
@@ -62,8 +62,8 @@ export default ({ children }: { children: React.ReactNode }) => {
           <Drawer.Screen name={"Splash"} component={Splash} />
           <Drawer.Screen name={"SignUp"} component={SignUp} />
           <Drawer.Screen name={"SignIn"} component={SignIn} />
-          <Drawer.Screen name={"OtpVerification"} component={OtpVerification} />
           <Drawer.Screen name={"ProductDetails"} component={ProductDetails} />
+          <Drawer.Screen name={"Home"} component={Home} />
         </Drawer.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

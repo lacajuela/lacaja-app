@@ -88,6 +88,7 @@ function SideContainerWeb() {
     </Center>
   );
 }
+
 const FormInput = ({
   children,
   ...props
@@ -128,17 +129,13 @@ const SignUpForm = () => {
         labelColor={colors.coolGray[400]}
         labelBGColor={colorMode === 'light' ? 'white' : colors.coolGray[800]}
         defaultValue={formData.email}
-        onChangeText={(email: string) =>
-          setFormData((prev) => ({ ...prev, email: email }))
-        }
+        onChangeText={(email: string) => setFormData((prev) => ({ ...prev, email: email }))}
       >
-        <FormControl.ErrorMessage>
-          Please enter a valid email
-        </FormControl.ErrorMessage>
+        <FormControl.ErrorMessage>Please enter a valid email</FormControl.ErrorMessage>
       </FormInput>
       <FormInput
         isRequired
-        secureTextEntry={showPass ? false : true}
+        secureTextEntry={!showPass}
         label="Password"
         labelColor={colors.coolGray[400]}
         labelBGColor={colorMode === 'light' ? 'white' : colors.coolGray[800]}
@@ -162,13 +159,11 @@ const SignUpForm = () => {
           </Pressable>
         }
       >
-        <FormControl.ErrorMessage>
-          Please enter a valid password
-        </FormControl.ErrorMessage>
+        <FormControl.ErrorMessage>Please enter a valid password</FormControl.ErrorMessage>
       </FormInput>
       <FormInput
         isRequired
-        secureTextEntry={showConfirmPass ? false : true}
+        secureTextEntry={!showConfirmPass}
         label="Confirm Password"
         labelColor={colors.coolGray[400]}
         labelBGColor={colorMode === 'light' ? 'white' : colors.coolGray[800]}
@@ -192,9 +187,7 @@ const SignUpForm = () => {
           </Pressable>
         }
       >
-        <FormControl.ErrorMessage>
-          Password does not match
-        </FormControl.ErrorMessage>
+        <FormControl.ErrorMessage>Password does not match</FormControl.ErrorMessage>
       </FormInput>
       <Checkbox
         _dark={{
@@ -250,11 +243,7 @@ const SignUpForm = () => {
           >
             Terms of Use{' '}
           </Link>
-          <Text
-            fontSize="sm"
-            _light={{ color: 'coolGray.800' }}
-            _dark={{ color: 'coolGray.300' }}
-          >
+          <Text fontSize="sm" _light={{ color: 'coolGray.800' }} _dark={{ color: 'coolGray.300' }}>
             &{' '}
           </Text>
           <Link
@@ -286,7 +275,11 @@ const SignUpForm = () => {
   );
 };
 
-function SignUpFormComponent() {
+type SignUpFormComponentProps = {
+  handlePressSignIn: () => void;
+};
+
+function SignUpFormComponent({ handlePressSignIn }: SignUpFormComponentProps) {
   return (
     <KeyboardAwareScrollView
       contentContainerStyle={{
@@ -321,17 +314,8 @@ function SignUpFormComponent() {
 
         <SignUpForm />
 
-        <HStack
-          space="2"
-          mt={{ base: 6, md: 4 }}
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Divider
-            w="30%"
-            _light={{ bg: 'coolGray.200' }}
-            _dark={{ bg: 'coolGray.700' }}
-          />
+        <HStack space="2" mt={{ base: 6, md: 4 }} alignItems="center" justifyContent="center">
+          <Divider w="30%" _light={{ bg: 'coolGray.200' }} _dark={{ bg: 'coolGray.700' }} />
           <Text
             fontWeight="medium"
             _light={{
@@ -343,18 +327,9 @@ function SignUpFormComponent() {
           >
             or
           </Text>
-          <Divider
-            w="30%"
-            _light={{ bg: 'coolGray.200' }}
-            _dark={{ bg: 'coolGray.700' }}
-          />
+          <Divider w="30%" _light={{ bg: 'coolGray.200' }} _dark={{ bg: 'coolGray.700' }} />
         </HStack>
-        <HStack
-          space="4"
-          mt={{ base: 6, md: 4 }}
-          alignItems="center"
-          justifyContent="center"
-        >
+        <HStack space="4" mt={{ base: 6, md: 4 }} alignItems="center" justifyContent="center">
           <Link href="https://nativebase.io">
             <Image
               width="6"
@@ -382,7 +357,7 @@ function SignUpFormComponent() {
             Already have an account?
           </Text>
           <Link
-            href="https://nativebase.io"
+            onPress={handlePressSignIn}
             _text={{
               fontSize: 'sm',
               fontWeight: 'bold',
@@ -409,14 +384,14 @@ function SignUpFormComponent() {
   );
 }
 
-export default function SignUp() {
+export default function SignUp({ navigation }: any) {
   return (
     <GuestLayout>
       <Hidden till="md">
         <SideContainerWeb />
       </Hidden>
       <Box flex="1">
-        <SignUpFormComponent />
+        <SignUpFormComponent handlePressSignIn={() => navigation.navigate('SignIn')} />
       </Box>
     </GuestLayout>
   );
