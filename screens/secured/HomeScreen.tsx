@@ -1,27 +1,13 @@
-import React from 'react';
-import {
-  HStack,
-  Icon,
-  Text,
-  VStack,
-  Button,
-  ScrollView,
-  Hidden,
-  Divider,
-  Input,
-  Image,
-  Pressable,
-} from 'native-base';
-import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react';
+import { Divider, ScrollView, VStack } from 'native-base';
 import DashboardLayout from '../../layouts/DashboardLayout';
 import ResumeCourses, { Course } from '../../components/ResumeCourses';
 import TrendingCourses from '../../components/TrendingCourses';
 import Categories from '../../components/Categories';
-
-type Icon = {
-  name: string;
-  text: string;
-};
+import { HomeBanner } from '../../components/Homebanner/HomeBanner';
+import * as SecureStore from 'expo-secure-store';
+import { BASE_API_URL } from '../../constants/constants';
+import axios from 'axios';
 
 const trendingCourses: Course[] = [
   {
@@ -78,194 +64,72 @@ const resumedCourses: Course[] = [
   },
 ];
 
-const icons: Icon[] = [
+const icons: IIcon[] = [
   {
-    name: 'add',
-    text: 'Maths',
+    icon: 'add',
+    name: 'Maths',
+    action: () => {},
   },
   {
-    name: 'lightbulb',
-    text: 'Physics',
+    icon: 'lightbulb',
+    name: 'Physics',
+    action: () => {},
   },
   {
-    name: 'science',
-    text: 'Chemistry',
+    icon: 'science',
+    name: 'Chemistry',
+    action: () => {},
   },
   {
-    name: 'coronavirus',
-    text: 'Biology',
+    icon: 'coronavirus',
+    name: 'Biology',
+    action: () => {},
   },
   {
-    name: 'sports-baseball',
-    text: 'Sports',
+    icon: 'sports-baseball',
+    name: 'Sports',
+    action: () => {},
   },
   {
-    name: 'psychology',
-    text: 'Psychology',
+    icon: 'psychology',
+    name: 'Psychology',
+    action: () => {},
   },
   {
-    name: 'business',
-    text: 'Business',
+    icon: 'business',
+    name: 'Business',
+    action: () => {},
   },
   {
-    name: 'more-vert',
-    text: 'More',
+    icon: 'more-vert',
+    name: 'More',
+    action: () => {},
   },
 ];
-const footerIcons: Icon[] = [
-  { name: 'home', text: 'Home' },
-  { name: 'menu-book', text: 'Syllabus' },
-  { name: 'speed', text: 'Test' },
-  { name: 'menu', text: 'Mas' },
-];
-function MobileFooter() {
-  return (
-    <Hidden from="md">
-      <HStack
-        justifyContent="space-between"
-        safeAreaBottom
-        h="20"
-        width="100%"
-        position="absolute"
-        left="0"
-        right="0"
-        bottom="0"
-        overflow="hidden"
-        alignSelf="center"
-        borderTopLeftRadius="20"
-        borderTopRightRadius="20"
-        _light={{ backgroundColor: 'coolGray.50' }}
-        _dark={{ backgroundColor: 'coolGray.800' }}
-      >
-        {footerIcons.map((item, index) => {
-          return (
-            <Button
-              variant="ghost"
-              key={index}
-              colorScheme="coolGray"
-              _stack={{
-                flexDirection: 'column',
-              }}
-              startIcon={
-                <Icon
-                  as={MaterialIcons}
-                  name={item.name}
-                  size="5"
-                  _light={{
-                    color: index === 0 ? 'primary.900' : 'coolGray.400',
-                  }}
-                  _dark={{
-                    color: index === 0 ? 'primary.500' : 'coolGray.400',
-                  }}
-                />
-              }
-              _text={{
-                _light: {
-                  color: index === 0 ? 'primary.900' : 'coolGray.400',
-                },
-                _dark: {
-                  color: index === 0 ? 'primary.500' : 'coolGray.400',
-                },
-              }}
-            >
-              {item.text}
-            </Button>
-          );
-        })}
-      </HStack>
-    </Hidden>
-  );
-}
-function Banner() {
-  return (
-    <VStack
-      _light={{ bg: 'primary.900' }}
-      _dark={{ bg: { base: 'coolGray.900', md: 'coolGray.800' } }}
-      zIndex={2}
-      borderRadius={{ md: 4 }}
-      px={{ base: 4, md: 8 }}
-      pt={{ base: 4, md: 8 }}
-      pb={{ base: 4, md: 0 }}
-      mb={{ md: 4 }}
-    >
-      <Hidden till="md">
-        <Pressable>
-          <Icon
-            size="6"
-            pt="0.5"
-            as={AntDesign}
-            name="arrowleft"
-            color="coolGray.50"
-          />
-        </Pressable>
-      </Hidden>
-
-      <HStack alignItems="center" justifyContent="space-between">
-        <VStack space="2" w={{ base: '55%', md: '70%' }}>
-          <Text
-            mt={{ base: 4, md: 10 }}
-            fontSize={{ base: 'lg', md: '3xl' }}
-            color="coolGray.50"
-            fontWeight="bold"
-          >
-            Welcome John
-          </Text>
-          <Text
-            w={{ md: '300' }}
-            mb={{ base: 3, md: 8 }}
-            fontSize={{ base: 'xs', md: 'md' }}
-            _light={{
-              color: 'primary.300',
-            }}
-            _dark={{
-              color: 'coolGray.400',
-            }}
-          >
-            Choose a goal and start learning from Top Educators
-          </Text>
-        </VStack>
-
-        <Image
-          mb={{ base: '-21', md: '0' }}
-          w={{ base: '114', md: '225' }}
-          h={{ base: '140', md: '184' }}
-          resizeMode="contain"
-          alt="nointernet"
-          source={require('../../assets/icongirl.png')}
-        />
-      </HStack>
-      <Hidden from="md">
-        <Input
-          mb={-10}
-          px={0}
-          py={3}
-          placeholder="Search"
-          _light={{
-            bg: 'white',
-            borderColor: 'coolGray.300',
-          }}
-          _dark={{
-            bg: 'coolGray.700',
-            borderColor: 'coolGray.500',
-          }}
-          InputLeftElement={
-            <Icon
-              as={MaterialIcons}
-              name="search"
-              _light={{ color: 'coolGray.400' }}
-              _dark={{ color: 'coolGray.400' }}
-              size="6"
-              ml={3}
-              mr={2}
-            />
-          }
-        />
-      </Hidden>
-    </VStack>
-  );
-}
 
 export default function HomeScreen() {
+  const [name, setName] = useState<string>('');
+  const [dni, setDni] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  useEffect(() => {
+    const getProfile = async () => {
+      const token = await SecureStore.getItemAsync('token');
+      const response = await axios.get<IProfileResponse>(`${BASE_API_URL}/auth/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    };
+    getProfile()
+      .then((data: IProfileResponse) => {
+        setName(data.name);
+        setDni(data.dni);
+      })
+      .catch((err) => {
+        setError(err);
+      });
+  }, []);
   return (
     <DashboardLayout
       title="Class 12th"
@@ -275,7 +139,7 @@ export default function HomeScreen() {
       rightPanelMobileHeader={true}
     >
       <ScrollView>
-        <Banner />
+        <HomeBanner name={name} />
         <VStack
           pt={{ base: 39, md: 8 }}
           pb={{ base: 10, md: 8 }}
@@ -290,7 +154,6 @@ export default function HomeScreen() {
           <TrendingCourses courses={trendingCourses} />
         </VStack>
       </ScrollView>
-      <MobileFooter />
     </DashboardLayout>
   );
 }

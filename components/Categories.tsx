@@ -1,21 +1,10 @@
 import React from 'react';
-import {
-  Box,
-  Icon,
-  Text,
-  VStack,
-  FlatList,
-  Center,
-  IconButton,
-} from 'native-base';
+import { Box, Icon, Text, VStack, FlatList, Center, IconButton } from 'native-base';
 import { MaterialIcons } from '@expo/vector-icons';
-type Icon = {
-  name: string;
-  text: string;
-};
-type IconType = { icons: Icon[] };
 
-const Categories = ({ icons }: IconType) => {
+type CategoriesProps = { icons: IIcon[] };
+
+const Categories: React.FC<CategoriesProps> = ({ icons }) => {
   return (
     <VStack px={{ base: 4, md: 8 }}>
       <Text
@@ -46,7 +35,7 @@ const Categories = ({ icons }: IconType) => {
                 icon={
                   <Icon
                     as={MaterialIcons}
-                    name={item.name}
+                    name={item.icon}
                     _light={{ color: 'primary.900' }}
                     _dark={{ color: 'coolGray.50' }}
                     size={6}
@@ -60,7 +49,7 @@ const Categories = ({ icons }: IconType) => {
               _dark={{ color: { base: 'coolGray.50', md: 'coolGray.400' } }}
               textAlign="center"
             >
-              {item.text}
+              {item.name}
             </Text>
           </VStack>
         )}

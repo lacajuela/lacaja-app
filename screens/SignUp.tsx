@@ -219,7 +219,7 @@ const SignUpForm = () => {
             _dark={{ color: 'coolGray.400' }}
             pl="2"
           >
-            I accept the{' '}
+            Acepto{' '}
           </Text>
           <Link
             href="https://nativebase.io"
@@ -241,35 +241,12 @@ const SignUpForm = () => {
               },
             }}
           >
-            Terms of Use{' '}
-          </Link>
-          <Text fontSize="sm" _light={{ color: 'coolGray.800' }} _dark={{ color: 'coolGray.300' }}>
-            &{' '}
-          </Text>
-          <Link
-            href="https://nativebase.io"
-            _text={{
-              fontSize: 'sm',
-              fontWeight: 'bold',
-              textDecoration: 'none',
-            }}
-            _light={{
-              _text: {
-                color: 'primary.900',
-              },
-            }}
-            _dark={{
-              _text: {
-                color: 'primary.500',
-              },
-            }}
-          >
-            Privacy Policy
+            Terminos y condiciones{' '}
           </Link>
         </HStack>
       </Checkbox>
       <Button mt={{ base: 8, md: 6 }} variant="solid" size="lg">
-        SIGN UP
+        Crear cuenta
       </Button>
     </FormControl>
   );
@@ -308,45 +285,11 @@ function SignUpFormComponent({ handlePressSignIn }: SignUpFormComponentProps) {
             _dark={{ color: 'coolGray.50' }}
             mb={'8'}
           >
-            Sign up to continue
+            Crea una cuenta para continuar
           </Text>
         </Hidden>
 
         <SignUpForm />
-
-        <HStack space="2" mt={{ base: 6, md: 4 }} alignItems="center" justifyContent="center">
-          <Divider w="30%" _light={{ bg: 'coolGray.200' }} _dark={{ bg: 'coolGray.700' }} />
-          <Text
-            fontWeight="medium"
-            _light={{
-              color: 'coolGray.400',
-            }}
-            _dark={{
-              color: 'coolGray.300',
-            }}
-          >
-            or
-          </Text>
-          <Divider w="30%" _light={{ bg: 'coolGray.200' }} _dark={{ bg: 'coolGray.700' }} />
-        </HStack>
-        <HStack space="4" mt={{ base: 6, md: 4 }} alignItems="center" justifyContent="center">
-          <Link href="https://nativebase.io">
-            <Image
-              width="6"
-              height="6"
-              source={require('../assets/facebook.png')}
-              alt="Alternate Text"
-            />
-          </Link>
-          <Link href="https://nativebase.io">
-            <Image
-              width="6"
-              height="6"
-              source={require('../assets/GoogleLogo.png')}
-              alt="Alternate Text"
-            />
-          </Link>
-        </HStack>
         <HStack space="1" alignItems="center" justifyContent="center" mt="auto">
           <Text
             fontSize="sm"
@@ -376,7 +319,7 @@ function SignUpFormComponent({ handlePressSignIn }: SignUpFormComponentProps) {
               },
             }}
           >
-            Sign In
+            Iniciar sesion
           </Link>
         </HStack>
       </Box>

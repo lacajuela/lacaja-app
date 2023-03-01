@@ -4,7 +4,7 @@ module.exports = {
     node: true,
     'react-native/react-native': true,
   },
-  extends: ['plugin:react/recommended', 'airbnb', 'airbnb/hooks', 'prettier', 'prettier/react'],
+  extends: ['plugin:react/recommended', 'airbnb', 'airbnb/hooks', 'prettier'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
