@@ -6,22 +6,22 @@ import DashboardLayout from '../../../layouts/DashboardLayout';
 const settings: ISetting[] = [
   {
     iconName: 'credit-card',
-    name: 'Change password',
+    name: 'Cambiar contraseña',
+    option: null,
+  },
+  {
+    iconName: 'account-circle',
+    name: 'Perfil',
     option: null,
   },
   {
     iconName: 'security',
-    name: 'General',
+    name: 'Cerrar sesion',
     option: null,
   },
   {
     iconName: 'supervisor-account',
-    name: 'Manage Accounts',
-    option: null,
-  },
-  {
-    iconName: 'g-translate',
-    name: 'Language',
+    name: 'Aportes jubilatorios',
     option: null,
   },
   {
@@ -32,6 +32,11 @@ const settings: ISetting[] = [
   {
     iconName: 'person-remove',
     name: 'Disable Account',
+    option: null,
+  },
+  {
+    iconName: 'help',
+    name: 'Ayuda',
     option: null,
   },
 ];
