@@ -31,6 +31,7 @@ const MobileFooter: React.FC<MobileFooterProps> = ({ footerIcons }: MobileFooter
               variant="ghost"
               key={index}
               colorScheme="coolGray"
+              onPress={item.action}
               _stack={{
                 flexDirection: 'column',
               }}
@@ -45,7 +46,6 @@ const MobileFooter: React.FC<MobileFooterProps> = ({ footerIcons }: MobileFooter
                   _dark={{
                     color: index === 0 ? 'primary.500' : 'coolGray.400',
                   }}
-                  onPressOut={item.action}
                 />
               }
               _text={{

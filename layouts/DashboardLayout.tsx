@@ -12,6 +12,7 @@ import { MobileHeader } from '../components/MobileHeader';
 import { Header } from '../components/Header';
 
 type DashboardLayoutProps = {
+  navigation: any;
   scrollable?: boolean;
   displayScreenTitle?: boolean;
   displaySidebar?: boolean;
@@ -37,6 +38,7 @@ type DashboardLayoutProps = {
 };
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({
+  navigation,
   displayScreenTitle = true,
   displaySidebar = true,
   header = {
@@ -50,14 +52,32 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
 }: DashboardLayoutProps) => {
   const [isSidebarVisible, setIsSidebarVisible] = React.useState(true);
   const footerIcons: IIcon[] = [
-    { icon: 'home', name: 'Home', action: () => {} },
-    { icon: 'menu-book', name: 'Syllabus', action: () => {} },
-    { icon: 'speed', name: 'Test', action: () => {} },
+    {
+      icon: 'home',
+      name: 'Home',
+      action: () => {
+        navigation.navigate('Home');
+      },
+    },
+    {
+      icon: 'menu-book',
+      name: 'Syllabus',
+      action: () => {
+        console.log('hola');
+      },
+    },
+    {
+      icon: 'speed',
+      name: 'Test',
+      action: () => {
+        console.log('hola');
+      },
+    },
     {
       icon: 'menu',
       name: 'Menu',
       action: () => {
-        setIsSidebarVisible(!isSidebarVisible);
+        navigation.navigate('Menu');
       },
     },
   ];

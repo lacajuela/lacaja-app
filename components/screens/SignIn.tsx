@@ -1,10 +1,10 @@
 import React from 'react';
 import { Center, Hidden, Image } from 'native-base';
 import * as SecureStore from 'expo-secure-store';
-import GuestLayout from '../layouts/GuestLayout';
-import { SignInComponent } from '../components';
 import axios from 'axios';
-import { BASE_API_URL } from '../constants/constants';
+import { SignInComponent } from '../SignInComponent/SignInComponent';
+import GuestLayout from '../../layouts/GuestLayout';
+import { BASE_API_URL } from '../../constants/constants';
 
 function SideContainerWeb() {
   return (
@@ -20,7 +20,7 @@ function SideContainerWeb() {
         size="80"
         alt="NativeBase Startup+ "
         resizeMode={'contain'}
-        source={require('../assets/logo.png')}
+        source={require('../../assets/logo.png')}
       />
     </Center>
   );

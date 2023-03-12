@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, VStack, Button, Image, Center, Hidden } from 'native-base';
-import GuestLayout from '../layouts/GuestLayout';
+import GuestLayout from '../../layouts/GuestLayout';
 
 type ActionButtonsType = {
   signInAction: () => void;
@@ -38,7 +38,7 @@ function HeaderLogo() {
     <Box alignItems="center" justifyContent="center">
       <Hidden from="md">
         <Image
-          source={require('../assets/cajademedicos_logo.png')}
+          source={require('../../assets/cajademedicos_logo.png')}
           height={100}
           width={400}
           alt="Logo"

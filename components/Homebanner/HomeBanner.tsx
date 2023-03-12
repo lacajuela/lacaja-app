@@ -4,9 +4,10 @@ import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
 type BannerProps = {
   name: string;
+  dni: string;
 };
 
-const HomeBanner: React.FC<BannerProps> = ({ name }) => {
+const HomeBanner: React.FC<BannerProps> = ({ name, dni }) => {
   return (
     <VStack
       _light={{ bg: 'primary.900' }}
@@ -45,7 +46,7 @@ const HomeBanner: React.FC<BannerProps> = ({ name }) => {
               color: 'coolGray.400',
             }}
           >
-            Choose a goal and start learning from Top Educators
+            {dni}
           </Text>
         </VStack>
 
@@ -58,33 +59,6 @@ const HomeBanner: React.FC<BannerProps> = ({ name }) => {
           source={require('../../assets/icongirl.png')}
         />
       </HStack>
-      <Hidden from="md">
-        <Input
-          mb={-10}
-          px={0}
-          py={3}
-          placeholder="Search"
-          _light={{
-            bg: 'white',
-            borderColor: 'coolGray.300',
-          }}
-          _dark={{
-            bg: 'coolGray.700',
-            borderColor: 'coolGray.500',
-          }}
-          InputLeftElement={
-            <Icon
-              as={MaterialIcons}
-              name="search"
-              _light={{ color: 'coolGray.400' }}
-              _dark={{ color: 'coolGray.400' }}
-              size="6"
-              ml={3}
-              mr={2}
-            />
-          }
-        />
-      </Hidden>
     </VStack>
   );
 };

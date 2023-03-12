@@ -19,9 +19,9 @@ import {
   Pressable,
 } from 'native-base';
 import { MaterialIcons } from '@expo/vector-icons';
-import FloatingLabelInput from '../components/FloatingLabelInput';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import GuestLayout from '../layouts/GuestLayout';
+import FloatingLabelInput from '../FloatingLabelInput';
+import GuestLayout from '../../layouts/GuestLayout';
 
 function MobileHeader() {
   return (
@@ -83,7 +83,7 @@ function SideContainerWeb() {
         size="80"
         alt="NativeBase Startup+ "
         resizeMode={'contain'}
-        source={require('../assets/logo.png')}
+        source={require('../../assets/logo.png')}
       />
     </Center>
   );

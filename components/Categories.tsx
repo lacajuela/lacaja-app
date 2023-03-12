@@ -13,7 +13,7 @@ const Categories: React.FC<CategoriesProps> = ({ icons }) => {
         fontSize="md"
         fontWeight="bold"
       >
-        Categories
+        Categorias
       </Text>
       <FlatList
         mt={4}
