@@ -10,6 +10,7 @@ import { MobileFooter } from '../components/MobileFooter';
 import { MainContent } from '../components/MainContent';
 import { MobileHeader } from '../components/MobileHeader';
 import { Header } from '../components/Header';
+import { Dimensions } from 'react-native';
 
 type DashboardLayoutProps = {
   navigation: any;
@@ -50,7 +51,6 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   },
   ...props
 }: DashboardLayoutProps) => {
-  const [isSidebarVisible, setIsSidebarVisible] = React.useState(true);
   const footerIcons: IIcon[] = [
     {
       icon: 'home',
@@ -81,32 +81,21 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
       },
     },
   ];
-  function toggleSidebar() {
-    setIsSidebarVisible(!isSidebarVisible);
-  }
 
-  function getSidebar(title: string) {
-    switch (title) {
-      case 'Class 12th':
-        return <SidebarHomeAndMenu />;
-      case 'Podcasts':
-        return <SidebarPodcastScreen />;
-      case 'Video Library':
-        return <SidebarPodcastScreen />;
-      case 'Playlist':
-        return <SidebarPodcastScreen />;
-      case 'Dashboard':
-        return <SidebarTopPerformingStocks />;
-      default:
-        return <Sidebar />;
-    }
-  }
+  const windowHeight = Dimensions.get('window').height;
+  const mobileFooterHeight = 1 * 20;
 
   return (
     <>
       <StatusBar translucent backgroundColor="transparent" barStyle="light-content" />
       <Box safeAreaTop _light={{ bg: 'primary.900' }} _dark={{ bg: 'coolGray.900' }} />
-      <VStack flex={1} _light={{ bg: 'primary.50' }} _dark={{ bg: 'customGray' }}>
+      <VStack
+        flex={1}
+        _light={{ bg: 'primary.50' }}
+        _dark={{ bg: 'customGray' }}
+        height={windowHeight - mobileFooterHeight}
+        safeAreaBottom
+      >
         <Hidden from="md">
           <MobileHeader
             title={props.title}
@@ -117,7 +106,6 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
         </Hidden>
         <Hidden till="md">
           <Header
-            toggleSidebar={toggleSidebar}
             title={props.title}
             subTitle={props.subTitle}
             menuButton={displaySidebar}
@@ -137,10 +125,6 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             borderTopColor: 'coolGray.700',
           }}
         >
-          {isSidebarVisible && displaySidebar && (
-            <Hidden till="md">{getSidebar(props.title)}</Hidden>
-          )}
-
           <Hidden till="md">
             <ScrollView
               flex={1}
@@ -154,10 +138,10 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
 
           <Hidden from="md">
             <MainContent {...props} displayScreenTitle={displayScreenTitle} />
-            <MobileFooter footerIcons={footerIcons} />
           </Hidden>
         </Box>
       </VStack>
+      <MobileFooter footerIcons={footerIcons} />
     </>
   );
 };

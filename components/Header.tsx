@@ -24,7 +24,6 @@ import React from 'react';
 type HeaderProps = {
   title: string;
   subTitle?: string;
-  toggleSidebar: () => void;
   menuButton: boolean;
   searchbar: boolean;
 };
