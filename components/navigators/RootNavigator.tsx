@@ -1,11 +1,11 @@
 import React from 'react';
 import { TransitionSpecs, TransitionPresets, createStackNavigator } from '@react-navigation/stack';
-import { Easing } from 'react-native';
 import Splash from '../screens/Splash';
 import SignUp from '../screens/SignUp';
 import { MenuScreen } from '../screens/secured/MenuScreen';
 import HomeScreen from '../screens/secured/HomeScreen';
 import { SignIn } from '../screens/SignIn';
+import { InvoicesListScreen } from '../screens/secured/InvoicesListScreen';
 
 const fade = (props: any) => {
   const { current } = props;
@@ -38,6 +38,11 @@ const RootStack: React.FC = () => {
       <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
       <Stack.Screen name="Menu" component={MenuScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+      <Stack.Screen
+        name="InvoicesListScreen"
+        component={InvoicesListScreen}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };

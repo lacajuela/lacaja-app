@@ -8,3 +8,10 @@ interface ISetting {
   name: string;
   option: string | null;
 }
+
+interface IInvoice {
+  period: string;
+  downloadUrl: string;
+  fileName: string;
+  ammount: number;
+}

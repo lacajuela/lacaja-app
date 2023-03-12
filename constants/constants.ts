@@ -1,1 +1,1 @@
-export const BASE_API_URL = 'https://lacaja.herokuapp.com/api/v1';
+export const BASE_API_URL = 'http://192.168.1.175:20202/api/v1';

@@ -61,9 +61,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
     },
     {
       icon: 'menu-book',
-      name: 'Syllabus',
+      name: 'Facturas',
       action: () => {
-        console.log('hola');
+        navigation.navigate('InvoicesListScreen');
       },
     },
     {

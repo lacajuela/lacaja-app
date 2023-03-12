@@ -6,3 +6,5 @@ interface IProfileResponse {
   name: string;
   dni: string;
 }
+
+type ListInvoiceResponse = IInvoice[];
