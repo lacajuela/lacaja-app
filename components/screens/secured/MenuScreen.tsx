@@ -2,44 +2,7 @@ import React from 'react';
 import { HStack, Icon, Text, Pressable, Button, Progress, Box } from 'native-base';
 import { MaterialIcons } from '@expo/vector-icons';
 import DashboardLayout from '../../../layouts/DashboardLayout';
-
-const settings: ISetting[] = [
-  {
-    iconName: 'credit-card',
-    name: 'Cambiar contraseña',
-    option: null,
-  },
-  {
-    iconName: 'account-circle',
-    name: 'Perfil',
-    option: null,
-  },
-  {
-    iconName: 'security',
-    name: 'Cerrar sesion',
-    option: null,
-  },
-  {
-    iconName: 'supervisor-account',
-    name: 'Aportes jubilatorios',
-    option: null,
-  },
-  {
-    iconName: 'link',
-    name: 'Linked Accounts',
-    option: null,
-  },
-  {
-    iconName: 'person-remove',
-    name: 'Disable Account',
-    option: null,
-  },
-  {
-    iconName: 'help',
-    name: 'Ayuda',
-    option: 'HelpScreen',
-  },
-];
+import { YesNoModal } from '../../Modal';
 
 type SettingCardProps = {
   item: ISetting;
@@ -79,6 +42,47 @@ const SettingCard: React.FC<SettingCardProps> = ({ item, action }) => {
 };
 
 const MenuScreen: React.FC<any> = ({ navigation }) => {
+  const [modalVisible, setModalVisible] = React.useState(false);
+  const settings: ISetting[] = [
+    {
+      iconName: 'credit-card',
+      name: 'Cambiar contraseña',
+      option: null,
+    },
+    {
+      iconName: 'account-circle',
+      name: 'Perfil',
+      option: null,
+    },
+    {
+      iconName: 'security',
+      name: 'Cerrar sesion',
+      option: null,
+      action: () => {
+        setModalVisible(true);
+      },
+    },
+    {
+      iconName: 'supervisor-account',
+      name: 'Aportes jubilatorios',
+      option: null,
+    },
+    {
+      iconName: 'link',
+      name: 'Linked Accounts',
+      option: null,
+    },
+    {
+      iconName: 'person-remove',
+      name: 'Disable Account',
+      option: null,
+    },
+    {
+      iconName: 'help',
+      name: 'Ayuda',
+      option: 'HelpScreen',
+    },
+  ];
   return (
     <>
       <DashboardLayout title="Menu" navigation={navigation}>
@@ -88,11 +92,23 @@ const MenuScreen: React.FC<any> = ({ navigation }) => {
               <SettingCard
                 key={index}
                 item={item}
-                action={() => navigation.navigate(item.option ? item.option : 'HomeScreen')}
+                action={
+                  item.action
+                    ? item.action
+                    : () => navigation.navigate(item.option ? item.option : 'HomeScreen')
+                }
               />
             );
           })}
         </Box>
+        <YesNoModal
+          message="Estás seguro que deseas cerrar sesión?"
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          yesAction={() => {
+            navigation.navigate('SignIn');
+          }}
+        />
       </DashboardLayout>
     </>
   );

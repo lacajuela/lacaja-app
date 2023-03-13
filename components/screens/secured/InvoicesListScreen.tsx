@@ -6,14 +6,16 @@ import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import * as FileSystem from 'expo-file-system';
 import { Dimensions } from 'react-native';
+import { navigate } from '@storybook/addon-links';
 
 type InvoiceCardProps = {
   item: IInvoice;
   key: number;
   downloadFile: (url: string, fileName: string) => void;
+  payAction: () => void;
 };
 
-const InvoiceCard: React.FC<InvoiceCardProps> = ({ item, key, downloadFile }) => {
+const InvoiceCard: React.FC<InvoiceCardProps> = ({ item, key, downloadFile, payAction }) => {
   return (
     <Box
       _light={{ bg: 'coolGray.100' }}
@@ -80,6 +82,7 @@ const InvoiceCard: React.FC<InvoiceCardProps> = ({ item, key, downloadFile }) =>
           _dark={{ borderColor: 'coolGray.400' }}
           size="xs"
           _text={{ fontWeight: 'medium', color: 'secondary.400' }}
+          onPress={payAction}
         >
           Pagar
         </Button>
@@ -147,7 +150,14 @@ const InvoicesListScreen: React.FC<any> = ({ navigation }) => {
             space="4"
           >
             {invoices.map((item, index) => {
-              return <InvoiceCard key={index} item={item} downloadFile={downloadFile} />;
+              return (
+                <InvoiceCard
+                  key={index}
+                  item={item}
+                  downloadFile={downloadFile}
+                  payAction={() => navigation.navigate('SelectPaymentMethodScreen')}
+                />
+              );
             })}
           </VStack>
         </ScrollView>

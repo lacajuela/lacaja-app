@@ -7,6 +7,7 @@ import HomeScreen from '../screens/secured/HomeScreen';
 import { SignIn } from '../screens/SignIn';
 import { InvoicesListScreen } from '../screens/secured/InvoicesListScreen';
 import { HelpScreen } from '../screens/secured/HelpScreen';
+import { SelectPaymentMethodScreen } from '../screens/secured/SelectPaymentMethodScreen';
 
 const fade = (props: any) => {
   const { current } = props;
@@ -38,6 +39,11 @@ const RootStack: React.FC = () => {
       <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
       <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
       <Stack.Screen name="HelpScreen" component={HelpScreen} options={{ headerShown: false }} />
+      <Stack.Screen
+        name="SelectPaymentMethodScreen"
+        component={SelectPaymentMethodScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen name="Menu" component={MenuScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
       <Stack.Screen
