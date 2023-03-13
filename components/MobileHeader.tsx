@@ -17,6 +17,7 @@ type MobileHeaderProps = {
   subTitle?: string;
   backButton: boolean;
   rightPanel?: boolean;
+  goBackAction: () => void;
 };
 export function MobileHeader(props: MobileHeaderProps) {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -43,6 +44,7 @@ export function MobileHeader(props: MobileHeaderProps) {
                   colorScheme="light"
                   _icon={{ color: 'coolGray.50' }}
                   icon={<Icon size="6" as={AntDesign} name="arrowleft" />}
+                  onPress={props.goBackAction}
                 />
               )}
               <VStack>

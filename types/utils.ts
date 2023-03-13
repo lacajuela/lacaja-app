@@ -7,6 +7,7 @@ interface ISetting {
   iconName: string;
   name: string;
   option: string | null;
+  action?: (navigation: any) => void;
 }
 
 interface IInvoice {

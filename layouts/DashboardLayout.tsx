@@ -102,6 +102,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             subTitle={props.subTitle}
             backButton={mobileHeader.backButton}
             rightPanel={props.rightPanelMobileHeader}
+            goBackAction={() => navigation.goBack()}
           />
         </Hidden>
         <Hidden till="md">
